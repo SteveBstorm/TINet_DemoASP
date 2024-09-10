@@ -26,6 +26,19 @@ namespace Exo_ASP_01.Controllers
 
         public IActionResult Contact()
         {
+            // Générer la page de formulaire lors d'une requete GET
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact([FromForm]ContactFormModel model)
+        {
+            // Traiter les données du formulaire lors d'une requete POST
+
+            if(ModelState.IsValid)
+            { 
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 

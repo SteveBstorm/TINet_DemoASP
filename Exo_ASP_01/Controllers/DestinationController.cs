@@ -28,7 +28,7 @@ namespace Exo_ASP_01.Controllers
             return View(_Destinations);
         }
 
-        public IActionResult Detail(int id)
+        public IActionResult Detail([FromRoute]int id)
         {
             DestinationViewModel? destination = _Destinations.SingleOrDefault(d => d.Id == id);
 
