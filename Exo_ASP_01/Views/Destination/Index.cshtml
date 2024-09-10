@@ -1,0 +1,16 @@
+﻿@model List<DestinationViewModel>;
+
+@{
+    ViewBag.Title = "Liste des destinations";
+}
+
+<h1 class="display-4">Liste des destinations</h1>
+<ul>
+    @foreach (DestinationViewModel dest in Model)
+    {
+        <li class="mt-2">
+            <h2 class="display-6">@dest.Name (@dest.Country)</h2>
+            <p>Plus d'information <a class="btn btn-link" asp-controller="Destination" asp-action="Detail" asp-route-id="@dest.Id">ICI</a></p>
+        </li>
+    }
+</ul>

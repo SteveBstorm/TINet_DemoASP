@@ -1,0 +1,14 @@
+﻿@model DestinationViewModel;
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h1 class="display-4">@Model.Name</h1>
+<h2 class="display-6">@Model.Country</h2>
+
+@*
+<p>@(Model.Description is not null ? Model.Description : "Aucune description disponible 😭")</p>
+*@
+
+<p>@(Model.Description ?? "Aucune description disponible 😭")</p>
