@@ -1,4 +1,5 @@
 using Exo_ASP_01.Models;
+using Exo_ASP_01.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -15,7 +16,7 @@ namespace Exo_ASP_01.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(ContactService.Contacts);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -37,9 +38,10 @@ namespace Exo_ASP_01.Controllers
 
             if(ModelState.IsValid)
             { 
+                ContactService.Contacts.Add(model);
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(model);
         }
 
     }

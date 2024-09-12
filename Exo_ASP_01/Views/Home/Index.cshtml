@@ -1,6 +1,35 @@
-﻿@{
+﻿@model IEnumerable<ContactFormModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<h1 class="display-4">Accueil</h1>
+<h1 class="display-4">Liste des contacts</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Pseudo)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ContactFormModel c in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => c.Email)
+                </td>
+                <td>
+                    @c.Pseudo
+                </td>
+                <td>
+                    <button>Détail</button>
+                    <button>Mettre à jour</button>
+                    <button>Supprimer</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
