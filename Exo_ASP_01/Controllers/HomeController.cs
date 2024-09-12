@@ -1,6 +1,7 @@
 using Exo_ASP_01.Models;
 using Exo_ASP_01.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.Diagnostics;
 
 namespace Exo_ASP_01.Controllers
@@ -42,6 +43,39 @@ namespace Exo_ASP_01.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
+        }
+        [HttpGet("{email}")]
+        public IActionResult Detail(string email)
+        {
+            ContactFormModel toDisplay = ContactService.Contacts.FirstOrDefault(x => x.Email == email);
+            return View(toDisplay);
+        }
+
+        public IActionResult Delete(string email)
+        {
+            ContactFormModel toDelete = ContactService.Contacts.FirstOrDefault(x => x.Email == email);
+
+            ContactService.Contacts.Remove(toDelete);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Update(string email)
+        {
+            ContactFormModel toUpdate = ContactService.Contacts.FirstOrDefault(x => x.Email == email);
+
+            return View(toUpdate);
+        }
+
+        [HttpPost]
+        public IActionResult Update(ContactFormModel model)
+        {
+            if(!ModelState.IsValid) return View(model);
+
+            ContactFormModel toUpdate = ContactService.Contacts.FirstOrDefault(x => x.Email == model.Email);
+            
+            ContactService.Contacts.Remove(toUpdate);
+            ContactService.Contacts.Add(model);
+            return RedirectToAction(nameof(Index));
         }
 
     }
